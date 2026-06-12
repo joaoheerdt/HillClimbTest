@@ -51,8 +51,8 @@ public class GamePanel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        activeMap.update(accelerate, reverse);
         activeVehicle.update(accelerate, reverse);
+        activeMap.update(activeVehicle.getCurrentSpeed());
         repaint();
     }
 

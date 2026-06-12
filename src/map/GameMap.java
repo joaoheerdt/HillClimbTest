@@ -5,7 +5,7 @@ import javax.swing.ImageIcon;
     public class GameMap {
 
         private Image mapImage;
-        private int mapMovement;
+        private double mapMovement;
         private int mapWidth;
 
         public GameMap(String imagePath) {
@@ -14,20 +14,17 @@ import javax.swing.ImageIcon;
             this.mapWidth = 800;
         }
 
-        public void update(boolean accelerate, boolean reverse) {
-            if (accelerate) {
-                mapMovement -= 5;
+        public void update(double vehicleSpeed) {
+            mapMovement -= (vehicleSpeed * 0.1);
+
             }
-            if (reverse) {
-                mapMovement += 5;
-            }
-        }
+
 
         public void draw(Graphics2D g2d, Component component) {
-            int visualOffset = mapMovement % mapWidth;
+            double visualOffset = mapMovement % mapWidth;
 
             for (int posX = -mapWidth; posX < 800 + mapWidth; posX += mapWidth) {
-                g2d.drawImage(mapImage, posX + visualOffset, 0, 800, 600, component);
+                g2d.drawImage(mapImage, (int) (posX + visualOffset), 0, 800, 600, component);
             }
         }
     }

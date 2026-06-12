@@ -5,18 +5,10 @@ import java.awt.*;
 public class Fusca extends Vehicle {
 
     public Fusca() {
-        super(10, 280, 350, 170, 80, "src/assets/vehicles/FuscaVermelho.png", "src/assets/vehicles/RodaFusca.png");
+        super(10, 280, 350, 170, 80, "src/assets/vehicles/FuscaVermelho.png", "src/assets/vehicles/RodaFusca.png", 100.0, 0.5);
     }
 
-    @Override
-    public void update(boolean accelerate, boolean reverse) {
-        if (accelerate) {
-            wheelAngle += 0.12;
-        }
-        if (reverse) {
-            wheelAngle -= 0.12;
-        }
-    }
+
 
     @Override
     public void draw(Graphics2D g2d, Component component) {
