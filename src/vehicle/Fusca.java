@@ -5,7 +5,7 @@ import java.awt.*;
 public class Fusca extends Vehicle {
 
     public Fusca() {
-        super(10, 280, 350, 170, 85, "src/assets/vehicles/FuscaVermelho.png", "src/assets/vehicles/RodaFusca.png");
+        super(10, 280, 350, 170, 80, "src/assets/vehicles/FuscaVermelho.png", "src/assets/vehicles/RodaFusca.png");
     }
 
     @Override
@@ -20,7 +20,7 @@ public class Fusca extends Vehicle {
 
     @Override
     public void draw(Graphics2D g2d, Component component) {
-        int wheelRadius = wheelSize / 2;
+        double wheelRadius = wheelSize / 2.0;
         int rearWheelX = x + 45;
         int rearWheelY = y + 90;
         int frontWheelX = x + 230;
