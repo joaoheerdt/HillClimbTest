@@ -4,21 +4,14 @@ import java.awt.*;
 import javax.swing.ImageIcon;
 
 public abstract class Vehicle {
-
-    protected int x;
-    protected int y;
-    protected int width;
-    protected int height;
-    protected Image bodyImage;
-    protected Image wheelImage;
-    protected int wheelSize;
+    protected int x, y, width, height, wheelSize;
+    protected Image bodyImage, wheelImage;
+    protected double speed, currentRpm, maxRpm, baseTorque, mass;
+    protected int currentGear;
+    protected double[] gearRatios;
     protected double wheelAngle;
 
-    protected double currentSpeed;
-    protected double maxSpeed;
-    protected double power;
-
-    public Vehicle(int x, int y, int width, int height, int wheelSize, String bodyPath, String wheelPath, double maxSpeed, double power) {
+    public Vehicle(int x, int y, int width, int height, int wheelSize, String bodyPath, String wheelPath) {
         this.x = x;
         this.y = y;
         this.width = width;
@@ -27,40 +20,28 @@ public abstract class Vehicle {
         this.bodyImage = new ImageIcon(bodyPath).getImage();
         this.wheelImage = new ImageIcon(wheelPath).getImage();
         this.wheelAngle = 0;
-        this.currentSpeed = 0.0;
-        this.maxSpeed = maxSpeed;
-        this.power = power;
     }
 
-    public void update(boolean accelerate, boolean reverse) {
-        if (accelerate) {
-            currentSpeed += power;
-            if (currentSpeed > maxSpeed) {
-                currentSpeed = maxSpeed;
-            }
-        }
-        else if (reverse) {
-            currentSpeed -= power;
-            if (currentSpeed < -maxSpeed * 0.5) {
-                currentSpeed = -maxSpeed * 0.5;
-            }
-        }
-        else {
-            if (currentSpeed > 0) {
-                currentSpeed -= 0.1;
-                if (currentSpeed < 0) currentSpeed = 0;
-            } else if (currentSpeed < 0) {
-                currentSpeed += 0.1;
-                if (currentSpeed > 0) currentSpeed = 0;
-            }
-        }
-
-        wheelAngle += currentSpeed * 0.02;
-    }
-
-    public double getCurrentSpeed() {
-        return currentSpeed;
-    }
-
+    public abstract void updatePhysics(boolean isAccelerating, boolean isBraking);
     public abstract void draw(Graphics2D g2d, Component component);
+
+    public void changeGear(int newGear) {
+        if (newGear >= 0 && newGear < gearRatios.length) {
+            double oldRatio = (currentGear == 0) ? 1.0 : gearRatios[currentGear];
+            double newRatio = (newGear == 0) ? 1.0 : gearRatios[newGear];
+
+            this.currentRpm *= (newRatio / oldRatio);
+            this.currentGear = newGear;
+        }
+    }
+
+    public double getTorqueFactor() {
+        if (currentRpm < 2000.00) return 0.5;
+        if (currentRpm > (maxRpm - 500.00)) return 0.6;
+        return 1.0;
+    }
+
+    public double getCurrentSpeed() { return this.speed; }
+    public double getCurrentRpm() { return this.currentRpm; }
+    public int getCurrentGear() { return this.currentGear; }
 }
