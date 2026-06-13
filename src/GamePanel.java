@@ -55,7 +55,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
         int currentGear = activeVehicle.getCurrentGear();
         double currentRpm = activeVehicle.getCurrentRpm();
-        double visualSpeed = activeVehicle.getCurrentSpeed() * 50;
+        double visualSpeed = activeVehicle.getCurrentSpeed() * 1.65;
 
         g2d.drawString("Gear: " + (currentGear == 0 ? "N" : currentGear), 20, 30);
         g2d.drawString(String.format("RPM: %.0f", currentRpm), 20, 55);

@@ -7,7 +7,7 @@ public abstract class Vehicle {
     protected int x, y, width, height, wheelSize;
     protected Image bodyImage, wheelImage;
     protected double speed, currentRpm, maxRpm, baseTorque, mass;
-    protected int currentGear;
+    protected int currentGear, maxSpeed;
     protected double[] gearRatios;
     protected double wheelAngle;
 

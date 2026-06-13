@@ -6,7 +6,7 @@ import java.awt.geom.AffineTransform;
 public class Fusca extends Vehicle {
 
     public Fusca() {
-        super(100, 350, 150, 60, 30, "src/assets/vehicles/FuscaVermelho.png", "src/assets/vehicles/RodaFusca.png");
+        super(50, 280, 300, 150, 67, "src/assets/vehicles/FuscaVermelho.png", "src/assets/vehicles/RodaFusca.png");
         this.maxRpm = 5000.0;
         this.baseTorque = 150.0;
         this.mass = 800.0;
@@ -20,7 +20,7 @@ public class Fusca extends Vehicle {
         double gearRatio = (currentGear == 0) ? 1.0 : gearRatios[currentGear];
 
         if (isAccelerating) {
-            double gainRpm = ((baseTorque * 500) / (mass * gearRatio)) * getTorqueFactor();
+            double gainRpm = ((baseTorque * 40 * gearRatio) / mass) * getTorqueFactor();
             this.currentRpm += gainRpm;
         } else if (isBraking) {
             this.currentRpm -= 80;
@@ -37,16 +37,16 @@ public class Fusca extends Vehicle {
             this.speed = (this.currentRpm / gearRatio) * 0.015;
         }
 
-        this.wheelAngle += this.speed * 0.1;
+        this.wheelAngle += this.speed * 0.04;
     }
 
     @Override
     public void draw(Graphics2D g2d, Component component) {
         g2d.drawImage(bodyImage, x, y, width, height, component);
 
-        int backWheelX = x + 20;
-        int frontWheelX = x + 105;
-        int wheelY = y + 35;
+        int backWheelX = x + 40;
+        int frontWheelX = x + 200;
+        int wheelY = y + 80;
 
 
         AffineTransform oldTransform = g2d.getTransform();

@@ -5,6 +5,7 @@ public class Main extends JFrame {
     public Main() {
         setTitle("Hill Climb: The game");
         setResizable(false);
+
         GamePanel gamePanel = new GamePanel();
         add(gamePanel);
         pack();
