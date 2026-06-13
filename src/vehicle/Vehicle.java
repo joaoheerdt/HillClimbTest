@@ -1,6 +1,8 @@
 package vehicle;
 
 import java.awt.*;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
 import javax.swing.ImageIcon;
 
 public abstract class Vehicle {
@@ -32,6 +34,8 @@ public abstract class Vehicle {
 
             this.currentRpm *= (newRatio / oldRatio);
             this.currentGear = newGear;
+
+            AudioGame.playSoundGear("src/assets/vehicles/sound/Gear.wav");
         }
     }
 
