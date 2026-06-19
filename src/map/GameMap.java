@@ -15,7 +15,7 @@ public class GameMap {
     }
 
     public void update(double vehicleSpeed) {
-        mapMovement -= (vehicleSpeed * 0.1);
+        mapMovement -= (vehicleSpeed * 0.2);
 
     }
 

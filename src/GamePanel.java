@@ -25,10 +25,15 @@ public class GamePanel extends JPanel implements ActionListener {
                 if (e.getKeyCode() >= KeyEvent.VK_0 && e.getKeyCode() <= KeyEvent.VK_4) {
                     activeVehicle.changeGear(e.getKeyCode() - KeyEvent.VK_0);
                 }
+
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    activeVehicle.toggleEngine();
+                }
             }
             public void keyReleased(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_D) isAccelerating = false;
                 if (e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_S) isBraking = false;
+
             }
         });
 
